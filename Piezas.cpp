@@ -125,5 +125,75 @@ Piece Piezas::pieceAt(int row, int column);
 **/
 Piece Piezas::gameState();
 {
-  
+  for (int i = 0; i < BOARD_COLS; i++)
+  {
+    if (board[2][i] == Blank)
+      return Invalid;
+  }
+  int xs = 0;
+  int os = 0;
+  piece prev = Invalid;
+  int inarow = 0;
+  for (int i = 0; i < BOARD_ROWS; i++)
+  {
+    for (int j = 0; j < BOARD_COLS; j++)
+    {
+      if (board[i][j] == prev)
+      {
+        inarow++;
+        if (board[i][j] == X && xs < inarow)
+        {
+          xs = inarow;
+        }
+        if (board[i][j] == O && os < inarow)
+        {
+          os = inarow;
+        }
+      }
+      else
+      {
+        prev = board[i][j];
+        inarow = 0;
+      }
+    }
+    prev = Invalid;
+    inarow = 0;
+  }
+  for (int i = 0; i < BOARD_COLS; i++)
+  {
+    for (int j = 0; j < BOARD_ROWS; j++)
+    {
+      if (board[j][i] == prev)
+      {
+        inarow++;
+        if (board[j][i] == X && xs < inarow)
+        {
+          xs = inarow;
+        }
+        if (board[j][i] == O && os < inarow)
+        {
+          os = inarow;
+        }
+      }
+      else
+      {
+        prev = board[j][i];
+        inarow = 0;
+      }
+    }
+    prev = Invalid;
+    inarow = 0;
+  }
+  if (xs == os)
+  {
+    return Blank;
+  }
+  if (xs > os)
+  {
+    return X;
+  }
+  if (os > xs)
+  {
+    return O;
+  }
 }
