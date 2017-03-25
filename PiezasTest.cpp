@@ -94,3 +94,35 @@ TEST(PiezasTest, tieTest)
   }
   ASSERT_EQ(p.gameState(), Blank);
 }
+
+TEST(PiezasTest, winnerTest)
+{
+  Piezas p;
+  p.dropPiece(0);
+  p.dropPiece(0);
+  p.dropPiece(1);
+  p.dropPiece(1);
+  p.dropPiece(2);
+  p.dropPiece(2);
+  p.dropPiece(3);
+  p.dropPiece(0);
+  p.dropPiece(3);
+  p.dropPiece(3);
+  p.dropPiece(2);
+  p.dropPiece(1);
+  ASSERT_EQ(p.gameState(), X);
+  p.reset()
+  p.dropPiece(0);
+  p.dropPiece(0);
+  p.dropPiece(1);
+  p.dropPiece(1);
+  p.dropPiece(2);
+  p.dropPiece(2);
+  p.dropPiece(0);
+  p.dropPiece(3);
+  p.dropPiece(1);
+  p.dropPiece(3);
+  p.dropPiece(2);
+  p.dropPiece(3);
+  ASSERT_EQ(p.gameState(), O);
+}
