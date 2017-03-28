@@ -22,13 +22,10 @@
 **/
 Piezas::Piezas()
 {
+  board.resize(BOARD_ROWS);
   for (int i = 0; i < BOARD_ROWS; i++)
   {
-    board.push_back(std::vector<Piece>);
-    for (int j = 0; j < BOARD_COLS; j++)
-    {
-      board[i].push_back(Blank);
-    }
+    board[i].resize(BOARD_COLS);
   }
   turn = X;
 }
@@ -133,7 +130,7 @@ Piece Piezas::gameState()
   }
   int xs = 0;
   int os = 0;
-  piece prev = Invalid;
+  Piece prev = Invalid;
   int inarow = 0;
   for (int i = 0; i < BOARD_ROWS; i++)
   {

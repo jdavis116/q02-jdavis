@@ -48,15 +48,15 @@ TEST(PiezasTest, fullBoard_pieceAtTest)
     for (int j = 0; j < BOARD_COLS; j++)
     {
       p.dropPiece(j);
-      ASSERT_NE(pieceAt(i, j), Blank);
-      ASSERT_NE(pieceAt(i, j), Invalid);
+      ASSERT_NE(p.pieceAt(i, j), Blank);
+      ASSERT_NE(p.pieceAt(i, j), Invalid);
       if (j % 2)
       {
-        ASSERT_EQ(pieceAt(i, j), O);
+        ASSERT_EQ(p.pieceAt(i, j), O);
       }
       else
       {
-        ASSERT_EQ(pieceAt(i, j), X);
+        ASSERT_EQ(p.pieceAt(i, j), X);
       }
     }
   }
@@ -111,7 +111,7 @@ TEST(PiezasTest, winnerTest)
   p.dropPiece(2);
   p.dropPiece(1);
   ASSERT_EQ(p.gameState(), X);
-  p.reset()
+  p.reset();
   p.dropPiece(0);
   p.dropPiece(0);
   p.dropPiece(1);
