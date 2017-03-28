@@ -21,12 +21,31 @@
  * specifies it is X's turn first
 **/
 Piezas::Piezas();
+{
+  for (int i = 0; i < BOARD_ROWS; i++)
+  {
+    for (int j = 0; j < BOARD_COLS; j++)
+    {
+      board[i][j] = Blank;
+    }
+  }
+  turn = X;
+}
 
 /**
  * Resets each board location to the Blank Piece value, with a board of the
  * same size as previously specified
 **/
 void Piezas::reset();
+{
+  for (int i = 0; i < BOARD_ROWS; i++)
+  {
+    for (int j = 0; j < BOARD_COLS; j++)
+    {
+      board[i][j] = Blank;
+    }
+  }
+}
 
 /**
  * Places a piece of the current turn on the board, returns what
@@ -37,12 +56,63 @@ void Piezas::reset();
  * Trying to drop a piece where it cannot be placed loses the player's turn
 **/ 
 Piece Piezas::dropPiece(int column);
+{
+  if (column >= BOARD_COLS || column < 0)
+  {
+    if (turn == X)
+    {
+      turn = O;
+    }
+    else
+    {
+      turn = X;
+    }
+    return Invalid;
+  }
+  if (board[2][column] != Blank)
+  {
+    if (turn == X)
+    {
+      turn = O;
+    }
+    else
+    {
+      turn = X;
+    }
+    return Blank;
+  }
+  for (int i = 0; i < BOARD_ROWS; i++)
+  {
+    if (board[i][column] == Blank)
+    {
+      board[i][column] = turn;
+      break;
+    }
+  }
+  if (turn == X)
+  {
+    turn = O;
+    return X;
+  }
+  else
+  {
+    turn = X;
+    return O;
+  }
+}
 
 /**
  * Returns what piece is at the provided coordinates, or Blank if there
  * are no pieces there, or Invalid if the coordinates are out of bounds
 **/
 Piece Piezas::pieceAt(int row, int column);
+{
+  if (row >= BOARD_ROWS || row < 0 || column >= BOARD_COLS || column < 0)
+  {
+    return Invalid;
+  }
+  return board[row][column];
+}
 
 /**
  * Returns which Piece has won, if there is a winner, Invalid if the game
@@ -54,3 +124,6 @@ Piece Piezas::pieceAt(int row, int column);
  * line, it is a tie.
 **/
 Piece Piezas::gameState();
+{
+  
+}
